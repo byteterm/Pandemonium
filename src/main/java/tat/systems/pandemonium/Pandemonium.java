@@ -15,17 +15,27 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import tat.systems.pandemonium.blocks.BlockRegistry;
+import tat.systems.pandemonium.items.ItemRegistry;
 
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("pandemonium")
+@Mod(Pandemonium.MOD_ID)
 public class Pandemonium {
 
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
+    // Pandemonium mod id
+    public static final String MOD_ID = "pandemonium";
+
     public Pandemonium() {
+        // Register all items from this mod
+        ItemRegistry.register();
+        // Register all blocks from this mod
+        BlockRegistry.register();
+
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
