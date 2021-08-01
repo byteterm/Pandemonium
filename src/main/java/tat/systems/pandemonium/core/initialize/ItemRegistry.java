@@ -1,12 +1,13 @@
-package tat.systems.pandemonium.items;
+package tat.systems.pandemonium.core.initialize;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import tat.systems.pandemonium.Pandemonium;
+import tat.systems.pandemonium.core.abstraction.ModdedItem;
+import tat.systems.pandemonium.server.items.DemoniumCrystalItem;
 
 public class ItemRegistry {
 
@@ -17,5 +18,11 @@ public class ItemRegistry {
     public static void register() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ITEMS.register(eventBus);
+
+        register(new DemoniumCrystalItem());
+    }
+
+    public static void register(ModdedItem item) {
+        ITEMS.register(item.getRegistryName(), () -> new Item(item.getProperties()));
     }
 }
