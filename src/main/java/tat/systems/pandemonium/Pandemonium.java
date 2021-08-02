@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tat.systems.pandemonium.core.initialize.BlockRegistry;
 import tat.systems.pandemonium.core.initialize.ItemRegistry;
+import tat.systems.pandemonium.server.event.AEvent;
 import tat.systems.pandemonium.server.event.DemoniumCrystalChargeEvent;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -33,6 +34,7 @@ public class Pandemonium {
         bus.addListener(this::setup);
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, DemoniumCrystalChargeEvent::onChargeEvent);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, AEvent::onTest);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }

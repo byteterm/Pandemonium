@@ -1,6 +1,8 @@
 package tat.systems.pandemonium.core.initialize;
 
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -22,6 +24,9 @@ public class ItemRegistry {
 
         register(new DemoniumCrystalItem());
         register(new DemoniumChargeCrystalItem());
+
+        ITEMS.register("pando_ritual_table", () -> new BlockItem(BlockRegistry.PANDO_RITUAL_BLOCK.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
+
     }
 
     public static void register(ModdedItem item) {

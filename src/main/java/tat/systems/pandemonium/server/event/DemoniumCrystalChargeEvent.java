@@ -2,12 +2,11 @@ package tat.systems.pandemonium.server.event;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,7 +28,7 @@ public class DemoniumCrystalChargeEvent {
 
             if(Objects.equals(stack.getItem().getRegistryName(), resourceLocation)) {
                 if(checkStructure(location)) {
-                    System.out.println("Gut Man");
+                    //MinecraftForge.EVENT_BUS.post(new TestEvent());
                     /*
                     ItemEntity test = new ItemEntity(location.getWorld(), location.getX(), location.getY(), location.getZ()
                             , new ItemStack(new Item()));
