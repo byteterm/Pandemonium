@@ -7,6 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import tat.systems.pandemonium.Pandemonium;
 import tat.systems.pandemonium.core.abstraction.ModdedItem;
+import tat.systems.pandemonium.server.items.DemoniumChargeCrystalItem;
 import tat.systems.pandemonium.server.items.DemoniumCrystalItem;
 
 public class ItemRegistry {
@@ -20,6 +21,7 @@ public class ItemRegistry {
         ITEMS.register(eventBus);
 
         register(new DemoniumCrystalItem());
+        register(new DemoniumChargeCrystalItem());
     }
 
     public static void register(ModdedItem item) {
