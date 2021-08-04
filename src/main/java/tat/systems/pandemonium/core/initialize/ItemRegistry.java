@@ -26,7 +26,6 @@ public class ItemRegistry {
         register(new DemoniumChargeCrystalItem());
 
         ITEMS.register("pando_ritual_table", () -> new BlockItem(BlockRegistry.PANDO_RITUAL_BLOCK.get(), new Item.Properties().group(ItemGroup.MATERIALS)));
-
     }
 
     public static void register(ModdedItem item) {
