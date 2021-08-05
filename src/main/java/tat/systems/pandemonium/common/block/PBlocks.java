@@ -1,6 +1,5 @@
 package tat.systems.pandemonium.common.block;
 
-
 import net.minecraft.block.Block;
 
 public enum PBlocks {
