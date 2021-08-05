@@ -2,9 +2,12 @@ package tat.systems.pandemonium.core;
 
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -14,6 +17,7 @@ import tat.systems.pandemonium.Pandemonium;
 import tat.systems.pandemonium.common.block.PBlocks;
 
 import java.util.Locale;
+import java.util.function.Supplier;
 
 public class Registry {
 
@@ -41,8 +45,16 @@ public class Registry {
 
     private void registerBlocks() {
         for(PBlocks blocks : PBlocks.values()) {
-            System.out.println("REGISTER BLOCK " + blocks.name());
-            BLOCKS.register(blocks.name().toLowerCase(Locale.ROOT), blocks::getBlock);
+            registerBlock(blocks.name().toLowerCase(Locale.ROOT), blocks::getBlock);
         }
+    }
+
+    private <T extends Block>RegistryObject<T> registerNoItem(String name, Supplier<T> block) {
+        return BLOCKS.register(name, block);
+    }
+
+    private <T extends Block> void registerBlock(String name, Supplier<T> block) {
+        RegistryObject<T> registryObject = registerNoItem(name, block);
+        ITEMS.register(name, () -> new BlockItem(registryObject.get(), new Item.Properties().group(ItemGroup.FOOD)));
     }
 }
