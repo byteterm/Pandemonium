@@ -1,4 +1,4 @@
-package tat.systems.pandemonium.server.event;
+package tat.systems.pandemonium.common.event;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.item.ItemEntity;

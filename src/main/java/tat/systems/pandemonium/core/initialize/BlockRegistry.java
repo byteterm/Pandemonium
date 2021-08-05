@@ -7,7 +7,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import tat.systems.pandemonium.Pandemonium;
-import tat.systems.pandemonium.server.blocks.PandoRitualTable;
+import tat.systems.pandemonium.common.blocks.PandoRitualTable;
 
 public class BlockRegistry {
 

@@ -1,5 +1,7 @@
 {
   "item.pandemonium.demonium_crystal": "Demonium Crystal",
   "item.pandemonium.demonium_charge_crystal": "Demonium Charge Crystal",
-  "block.pandemonium.pando_ritual_table": "Pando Ritual Table"
+  "block.pandemonium.pando_ritual_table": "Pando Ritual Table",
+
+  "itemGroup.pandemonium": "Pandemonium Items"
 }

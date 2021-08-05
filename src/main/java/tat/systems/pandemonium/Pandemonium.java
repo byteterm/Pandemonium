@@ -10,8 +10,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tat.systems.pandemonium.core.initialize.BlockRegistry;
 import tat.systems.pandemonium.core.initialize.ItemRegistry;
-import tat.systems.pandemonium.server.event.AEvent;
-import tat.systems.pandemonium.server.event.DemoniumCrystalChargeEvent;
+import tat.systems.pandemonium.common.event.AEvent;
+import tat.systems.pandemonium.common.event.DemoniumCrystalChargeEvent;
+import tat.systems.pandemonium.core.initialize.TileEntityRegistry;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Pandemonium.MOD_ID)
@@ -31,6 +32,7 @@ public class Pandemonium {
 
         // Register the setup method for modloading
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        TileEntityRegistry.TILE_ENTITY_TYPE.register(bus);
         bus.addListener(this::setup);
 
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, DemoniumCrystalChargeEvent::onChargeEvent);

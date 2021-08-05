@@ -1,4 +1,4 @@
-package tat.systems.pandemonium.server.blocks;
+package tat.systems.pandemonium.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -6,6 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -18,8 +19,10 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import tat.systems.pandemonium.core.abstraction.BlockHorizontal;
+import tat.systems.pandemonium.core.initialize.TileEntityRegistry;
 import tat.systems.pandemonium.core.util.ShapeUtil;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -54,6 +57,17 @@ public class PandoRitualTable extends BlockHorizontal {
             }
         }
         return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return TileEntityRegistry.PANDO_RITUAL_TABLE.get().create();
     }
 
     @SuppressWarnings("deprecated")

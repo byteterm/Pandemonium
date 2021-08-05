@@ -1,4 +1,4 @@
-package tat.systems.pandemonium.server.event.call;
+package tat.systems.pandemonium.common.event.call;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.eventbus.api.Event;
