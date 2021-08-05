@@ -1,18 +1,12 @@
 package tat.systems.pandemonium;
 
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import tat.systems.pandemonium.core.initialize.BlockRegistry;
-import tat.systems.pandemonium.core.initialize.ItemRegistry;
-import tat.systems.pandemonium.common.event.AEvent;
-import tat.systems.pandemonium.common.event.DemoniumCrystalChargeEvent;
-import tat.systems.pandemonium.core.initialize.TileEntityRegistry;
+import tat.systems.pandemonium.common.block.PBlocks;
+import tat.systems.pandemonium.core.Registry;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Pandemonium.MOD_ID)
@@ -24,26 +18,28 @@ public class Pandemonium {
     // Pandemonium mod id
     public static final String MOD_ID = "pandemonium";
 
+    // Registry for items, blocks, containers, tileEntities
+    private final Registry registry;
+
+    // Main instance
+    private static Pandemonium instance;
+
     public Pandemonium() {
-        // Register all items from this mod
-        ItemRegistry.register();
-        // Register all blocks from this mod
-        BlockRegistry.register();
+        instance = this;
+        this.registry = new Registry();
 
-        // Register the setup method for modloading
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        TileEntityRegistry.TILE_ENTITY_TYPE.register(bus);
-        bus.addListener(this::setup);
+        // Register Blocks, Items, Container, TileEntity
+        registry.register();
 
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, DemoniumCrystalChargeEvent::onChargeEvent);
-        MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGH, AEvent::onTest);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-
+    public static Pandemonium getInstance() {
+        return instance;
     }
 
-
+    public Registry getRegistry() {
+        return this.registry;
+    }
 }
