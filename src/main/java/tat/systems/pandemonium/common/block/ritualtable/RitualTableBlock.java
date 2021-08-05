@@ -30,4 +30,6 @@ public class RitualTableBlock extends Block {
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return null;
     }
+
+    //ToDo: onRemove | use
 }
