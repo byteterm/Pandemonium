@@ -4,16 +4,26 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
-import tat.systems.pandemonium.common.block.HorizontalBlock;
+import net.minecraftforge.fml.network.NetworkHooks;
+import tat.systems.pandemonium.Pandemonium;
+import tat.systems.pandemonium.common.block.PTileEntity;
+import tat.systems.pandemonium.common.block.abstraction.HorizontalBlock;
+import tat.systems.pandemonium.core.Registry;
 import tat.systems.pandemonium.core.util.ShapeUtil;
 
 import javax.annotation.Nullable;
@@ -48,11 +58,24 @@ public class RitualTableBlock extends HorizontalBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return null;
+        return PTileEntity.RITUAL_TABLE.getRegistryObject().get().create();
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
         return SHAPES.get(state.get(HORIZONTAL_FACING));
+    }
+
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isRemote) {
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
+
+            if (tileEntity instanceof RitualTableTileEntity) {
+                NetworkHooks.openGui((ServerPlayerEntity) player, (RitualTableTileEntity) tileEntity, pos);
+            }
+        }
+
+        return ActionResultType.SUCCESS;
     }
 }

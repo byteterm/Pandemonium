@@ -1,4 +1,4 @@
-package tat.systems.pandemonium.common.block;
+package tat.systems.pandemonium.common.block.abstraction;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;

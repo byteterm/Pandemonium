@@ -15,6 +15,10 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import tat.systems.pandemonium.Pandemonium;
 import tat.systems.pandemonium.common.block.PBlocks;
+import tat.systems.pandemonium.common.block.PContainer;
+import tat.systems.pandemonium.common.block.PTileEntity;
+import tat.systems.pandemonium.common.block.ritualtable.RitualTableBlock;
+import tat.systems.pandemonium.common.block.ritualtable.RitualTableTileEntity;
 
 import java.util.Locale;
 import java.util.function.Supplier;
@@ -36,10 +40,26 @@ public class Registry {
         CONTAINERS.register(eventBus);
         TILE_ENTITIES.register(eventBus);
 
+        // Register Blocks
         registerBlocks();
+        // Register TileEntity
+        registerTileEntity();
+        // Register Container
+        registerContainer();
     }
 
-    public <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {
+    private void registerContainer() {
+        for (PContainer container : PContainer.values()) {
+            CONTAINERS.register(container.getPBlocks().name().toLowerCase(Locale.ROOT), container::getContainerType);
+        }
+    }
+
+    private void registerTileEntity() {
+        for (PTileEntity tileEntity : PTileEntity.values())
+            tileEntity.getRegistryObject();
+    }
+
+    private <T extends IForgeRegistryEntry<T>> DeferredRegister<T> create(IForgeRegistry<T> registry) {
         return DeferredRegister.create(registry, Pandemonium.MOD_ID);
     }
 
